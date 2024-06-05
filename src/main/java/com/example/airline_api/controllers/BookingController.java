@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -30,7 +31,12 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<Booking> addNewBooking(@RequestBody BookingDTO bookingDTO){
         Booking booking = bookingService.addNewBooking(bookingDTO);
-        return new ResponseEntity<>(booking, HttpStatus.CREATED);
+        if (Objects.isNull(booking)) {
+            return new ResponseEntity<>(null, HttpStatus.METHOD_NOT_ALLOWED);
+        }
+        else {
+            return new ResponseEntity<>(booking, HttpStatus.OK);
+        }
     }
 
 

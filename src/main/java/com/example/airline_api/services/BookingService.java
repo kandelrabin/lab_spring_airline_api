@@ -27,12 +27,16 @@ public class BookingService {
 
 
     public Booking addNewBooking(BookingDTO bookingDTO){
-        Passenger passenger = passengerService.getSinglePassenger(bookingDTO.getPassengerId()).get();
         Flight flight = flightService.getSingleFlight(bookingDTO.getFlightId()).get();
-        Booking booking = new Booking(flight, passenger, bookingDTO.getSeatNumber());
-        flightService.reduceFlightCapacity(bookingDTO.getFlightId());
-        bookingRepository.save(booking);
-        return booking;
+        if (flight.getCapacity() > 0){
+            Passenger passenger = passengerService.getSinglePassenger(bookingDTO.getPassengerId()).get();
+            Booking booking = new Booking(flight, passenger, bookingDTO.getSeatNumber());
+            flightService.reduceFlightCapacity(bookingDTO.getFlightId());
+            bookingRepository.save(booking);
+            return booking;
+        } else {
+            return null;
+        }
     }
 
     public List<Booking> getAllBookings(){
