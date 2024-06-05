@@ -35,12 +35,12 @@ public class BookingController {
 
 
     // PARTIAL UPDATE
-    @PatchMapping(value = "/{bookingId}")
-    public ResponseEntity<Booking> updateMealPreference(@PathVariable Long bookingId, @RequestBody Map<String,String> update){
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Booking> updateMealPreference(@PathVariable Long id, @RequestBody Map<String,String> update){
         String mealPreference = update.get("mealPreference");
-        Optional<Booking> bookingOptional = bookingService.getSingleBooking(bookingId);
+        Optional<Booking> bookingOptional = bookingService.getSingleBooking(id);
         if (bookingOptional.isPresent()){
-            bookingService.updateMealPreference(bookingId, mealPreference);
+            bookingService.updateMealPreference(id, mealPreference);
             return new ResponseEntity<>(bookingOptional.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
