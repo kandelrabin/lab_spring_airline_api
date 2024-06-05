@@ -13,12 +13,12 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "flight_id", nullable = false)
-    @JsonIgnoreProperties({"booking"})
+    @JsonIgnoreProperties({"bookings"})
     private Flight flight;
 
     @ManyToOne
     @JoinColumn(name = "passenger", nullable = false)
-    @JsonIgnoreProperties({"booking"})
+    @JsonIgnoreProperties({"bookings"})
     private Passenger passenger;
 
     @Column(name = "seat_number")
