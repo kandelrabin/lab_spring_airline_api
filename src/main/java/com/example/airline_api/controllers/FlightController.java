@@ -17,11 +17,16 @@ public class FlightController {
     @Autowired
     FlightService flightService;
 
-    // INDEX
+    // INDEX and FILTER merged
     @GetMapping
-    public ResponseEntity<List<Flight>> getAllFlights(){
-        List<Flight> flights = flightService.getAllFlights();
-        return new ResponseEntity<>(flights, HttpStatus.OK);
+    public ResponseEntity<List<Flight>> getAllFlights(@RequestParam Optional<String> destination){
+        List<Flight> flights;
+        if (destination.isEmpty()){
+            flights = flightService.getAllFlights();
+        } else {
+            flights = flightService.filterFlightsByDestination(destination.get());
+        }
+            return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 
     // SHOW
@@ -48,5 +53,8 @@ public class FlightController {
         flightService.cancelFlight(id);
         return new ResponseEntity<>(id, HttpStatus.OK);
     }
+
+
+
 
 }

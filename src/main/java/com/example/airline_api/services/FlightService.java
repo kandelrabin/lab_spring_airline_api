@@ -45,5 +45,9 @@ public class FlightService {
         flightRepository.deleteById(id);
     }
 
+    public List<Flight> filterFlightsByDestination(String destination){
+        return flightRepository.findByDestinationEquals(destination);
+    }
+
 
 }
