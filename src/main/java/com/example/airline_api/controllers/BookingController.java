@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -33,10 +34,18 @@ public class BookingController {
     }
 
 
-    // TODO: Extension - Update passenger meal preference
-    @PatchMapping
-    public ResponseEntity<Booking> updateMealPreference(){
-        return null;
+    // PARTIAL UPDATE
+    @PatchMapping(value = "/{bookingId}")
+    public ResponseEntity<Booking> updateMealPreference(@PathVariable Long bookingId, @RequestBody Map<String,String> update){
+        String mealPreference = update.get("mealPreference");
+        Optional<Booking> bookingOptional = bookingService.getSingleBooking(bookingId);
+        if (bookingOptional.isPresent()){
+            bookingService.updateMealPreference(bookingId, mealPreference);
+            return new ResponseEntity<>(bookingOptional.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+
     }
 
     // SHOW

@@ -43,11 +43,14 @@ public class DataLoader implements ApplicationRunner {
         passengerRepository.save(harry);
 
         Booking booking1 = new Booking(londonFlight, rabin, 1);
+        londonFlight.setCapacity(londonFlight.getCapacity()-1);
+        flightRepository.save(londonFlight);
         bookingRepository.save(booking1);
 
         Booking booking2 = new Booking(dublinFlight, john, 1);
+        dublinFlight.setCapacity(dublinFlight.getCapacity()-1);
+        flightRepository.save(dublinFlight);
         bookingRepository.save(booking2);
-
 
     }
 }

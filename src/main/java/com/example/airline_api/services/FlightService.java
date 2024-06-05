@@ -26,5 +26,11 @@ public class FlightService {
         return flightRepository.findById(id);
     }
 
+    public void reduceFlightCapacity(Long id){
+        Flight flight = getSingleFlight(id).get();
+        flight.setCapacity(flight.getCapacity()-1);
+        flightRepository.save(flight);
+    }
+
 
 }
