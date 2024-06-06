@@ -2,6 +2,7 @@ package com.example.airline_api.controllers;
 
 import com.example.airline_api.models.Booking;
 import com.example.airline_api.models.BookingDTO;
+import com.example.airline_api.models.MealPreference;
 import com.example.airline_api.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,7 +44,7 @@ public class BookingController {
     // PARTIAL UPDATE
     @PatchMapping(value = "/{id}")
     public ResponseEntity<Booking> updateMealPreference(@PathVariable Long id, @RequestBody Map<String,String> update){
-        String mealPreference = update.get("mealPreference");
+        MealPreference mealPreference = MealPreference.valueOf(update.get("mealPreference"));
         Optional<Booking> bookingOptional = bookingService.getSingleBooking(id);
         if (bookingOptional.isPresent()){
             bookingService.updateMealPreference(id, mealPreference);

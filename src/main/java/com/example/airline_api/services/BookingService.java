@@ -1,9 +1,6 @@
 package com.example.airline_api.services;
 
-import com.example.airline_api.models.Booking;
-import com.example.airline_api.models.BookingDTO;
-import com.example.airline_api.models.Flight;
-import com.example.airline_api.models.Passenger;
+import com.example.airline_api.models.*;
 import com.example.airline_api.repositories.BookingRepository;
 import com.example.airline_api.repositories.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +27,8 @@ public class BookingService {
         Flight flight = flightService.getSingleFlight(bookingDTO.getFlightId()).get();
         if (flight.getCapacity() > 0){
             Passenger passenger = passengerService.getSinglePassenger(bookingDTO.getPassengerId()).get();
-            Booking booking = new Booking(flight, passenger, bookingDTO.getSeatNumber());
+            MealPreference mealPreference = MealPreference.valueOf(bookingDTO.getMealPreference());
+            Booking booking = new Booking(flight, passenger, bookingDTO.getSeatNumber(), mealPreference);
             flightService.reduceFlightCapacity(bookingDTO.getFlightId());
             bookingRepository.save(booking);
             return booking;
@@ -47,7 +45,7 @@ public class BookingService {
         return bookingRepository.findById(id);
     }
 
-    public Booking updateMealPreference(Long id, String mealPreference){
+    public Booking updateMealPreference(Long id, MealPreference mealPreference){
         Booking booking = getSingleBooking(id).get();
         booking.setMealPreference(mealPreference);
         bookingRepository.save(booking);

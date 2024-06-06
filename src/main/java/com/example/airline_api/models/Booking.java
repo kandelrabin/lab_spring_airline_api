@@ -25,13 +25,13 @@ public class Booking {
     private int seatNumber;
 
     @Column(name = "meal_preference")
-    private String mealPreference;
+    private MealPreference mealPreference;
 
-    public Booking(Flight flight, Passenger passenger, int seatNumber){
+    public Booking(Flight flight, Passenger passenger, int seatNumber, MealPreference mealPreference){
         this.flight = flight;
         this.passenger = passenger;
         this.seatNumber = seatNumber;
-        this.mealPreference = "Standard Meal";
+        this.mealPreference = mealPreference;
     }
 
     public Booking(){
@@ -70,11 +70,11 @@ public class Booking {
         this.seatNumber = seatNumber;
     }
 
-    public String getMealPreference() {
+    public MealPreference getMealPreference() {
         return mealPreference;
     }
 
-    public void setMealPreference(String mealPreference) {
+    public void setMealPreference(MealPreference mealPreference) {
         this.mealPreference = mealPreference;
     }
 }

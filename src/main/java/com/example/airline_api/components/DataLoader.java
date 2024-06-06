@@ -2,6 +2,7 @@ package com.example.airline_api.components;
 
 import com.example.airline_api.models.Booking;
 import com.example.airline_api.models.Flight;
+import com.example.airline_api.models.MealPreference;
 import com.example.airline_api.models.Passenger;
 import com.example.airline_api.repositories.BookingRepository;
 import com.example.airline_api.repositories.FlightRepository;
@@ -51,12 +52,12 @@ public class DataLoader implements ApplicationRunner {
         Passenger salah = new Passenger("Mohamed Salah", "msalah@outlook.com");
         passengerRepository.save(salah);
 
-        Booking booking1 = new Booking(londonFlight, rabin, 1);
+        Booking booking1 = new Booking(londonFlight, rabin, 1, MealPreference.valueOf("SDML"));
         londonFlight.setCapacity(londonFlight.getCapacity()-1);
         flightRepository.save(londonFlight);
         bookingRepository.save(booking1);
 
-        Booking booking2 = new Booking(dublinFlight, john, 1);
+        Booking booking2 = new Booking(dublinFlight, john, 1, MealPreference.valueOf("VGML"));
         dublinFlight.setCapacity(dublinFlight.getCapacity()-1);
         flightRepository.save(dublinFlight);
         bookingRepository.save(booking2);
