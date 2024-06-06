@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"destination\": \"London Stansted Airport\",\n    \"capacity\" : 5,\n    \"departureDate\": \"01/01/2024\",\n    \"departureTime\": \"18:30\"\n}",
+							"raw": "{\n    \"destination\": \"London Stansted Airport\",\n    \"capacity\" : 5,\n    \"departureDate\": \"2024-01-01\",\n    \"departureTime\": \"18:30\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

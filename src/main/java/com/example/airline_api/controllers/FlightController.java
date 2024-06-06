@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -42,7 +45,12 @@ public class FlightController {
 
     // CREATE
     @PostMapping
-    public ResponseEntity<Flight> addNewFlight(@RequestBody Flight flight){
+    public ResponseEntity<Flight> addNewFlight(@RequestBody Map<String, Object> flightPayload){
+        String destination = String.valueOf(flightPayload.get("destination"));
+        int capacity = (int) flightPayload.get("capacity");
+        LocalDate departureDate = LocalDate.parse(String.valueOf(flightPayload.get("departureDate")));
+        LocalTime departureTime = LocalTime.parse(String.valueOf(flightPayload.get("departureTime")));
+        Flight flight = new Flight(destination, capacity, departureDate, departureTime);
         flightService.addNewFlight(flight);
         return new ResponseEntity<>(flight, HttpStatus.CREATED);
     }
