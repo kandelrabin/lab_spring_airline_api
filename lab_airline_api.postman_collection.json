@@ -60,7 +60,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/flights?destination=Dublin Airport",
+							"raw": "localhost:8080/flights?destination=NY",
 							"host": [
 								"localhost"
 							],
@@ -71,7 +71,7 @@
 							"query": [
 								{
 									"key": "destination",
-									"value": "Dublin Airport"
+									"value": "NY"
 								}
 							]
 						}
@@ -128,7 +128,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Harry\",\n    \"email\": \"harry@live.com\"\n}",
+							"raw": "{\n    \"name\":\"Sabin\",\n    \"email\": \"Sabin@live.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -215,7 +215,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"flightId\":1,\n    \"passengerId\":5,\n    \"seatNumber\":5\n}",
+							"raw": "{\n    \"flightId\":1,\n    \"passengerId\":6,\n    \"mealPreference\": \"SDML\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
