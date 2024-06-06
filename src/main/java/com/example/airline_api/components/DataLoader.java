@@ -51,11 +51,13 @@ public class DataLoader implements ApplicationRunner {
         passengerRepository.save(salah);
 
         Booking booking1 = new Booking(londonFlight, rabin,1, MealPreference.valueOf("SDML"));
+        londonFlight.addToAllocatedSeats(1);
         londonFlight.setCapacity(londonFlight.getCapacity()-1);
         flightRepository.save(londonFlight);
         bookingRepository.save(booking1);
 
         Booking booking2 = new Booking(dublinFlight, john,1, MealPreference.valueOf("VGML"));
+        dublinFlight.addToAllocatedSeats(1);
         dublinFlight.setCapacity(dublinFlight.getCapacity()-1);
         flightRepository.save(dublinFlight);
         bookingRepository.save(booking2);

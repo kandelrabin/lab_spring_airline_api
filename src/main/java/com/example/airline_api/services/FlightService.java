@@ -58,13 +58,14 @@ public class FlightService {
         return flight.getCapacity();
     }
 
-    public int allocateSeat(Long id){
+    public void allocateSeat(Long id, int seatNumber){
         Flight flight = getSingleFlight(id).get();
-        int seat = flight.allocateRandomSeat();
+        flight.addToAllocatedSeats(seatNumber);
+        reduceFlightCapacity(id);
         flightRepository.save(flight);
-        return seat;
-
     }
+
+
 
 
 }

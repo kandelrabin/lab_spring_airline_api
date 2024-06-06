@@ -36,7 +36,11 @@ public class Flight {
     private List<Booking> bookings;
 
     @JsonIgnore
-    private List<Integer> seatsAvailable;
+    private List<Integer> allocatedSeats;
+
+    @JsonIgnore
+    private final int totalSeatsOnFlight;
+
 
     public Flight(String destination, int capacity, LocalDate departureDate, LocalTime departureTime) {
         this.destination = destination;
@@ -44,11 +48,15 @@ public class Flight {
         this.departureDate = departureDate;
         this.departureTime = departureTime;
         this.bookings = new ArrayList<>();
-        this.seatsAvailable = seatsOnEmptyFlight(capacity);
+        this.allocatedSeats = new ArrayList<>();
+        this.totalSeatsOnFlight = capacity;
     }
 
     public Flight() {
+        this.totalSeatsOnFlight = 0;
     }
+
+
 
     public long getId() {
         return id;
@@ -106,39 +114,23 @@ public class Flight {
         this.bookings.remove(booking);
     }
 
-//  Additional getter and setters for flight
-
-
-    public List<Integer> getSeatsAvailable() {
-        return seatsAvailable;
+    public List<Integer> getAllocatedSeats() {
+        return this.allocatedSeats;
     }
 
-    public void setSeatsAvailable(List<Integer> seatsAvailable) {
-        this.seatsAvailable = seatsAvailable;
+    public void setAllocatedSeats(List<Integer> allocatedSeats) {
+        this.allocatedSeats = allocatedSeats;
     }
 
-    public int allocateRandomSeat(){
-        Random rand = new Random();
-        int randomIndex = rand.nextInt(this.seatsAvailable.size());
-        int randomSeat = this.seatsAvailable.get(randomIndex);
-        this.seatsAvailable.remove(randomSeat);
-        return randomSeat;
+    public void addToAllocatedSeats(int seatNumber){
+        this.allocatedSeats.add(seatNumber);
     }
 
-    public void returnSeat(int seatNumber) throws Exception{
-        if (!this.seatsAvailable.contains(seatNumber)){
-            this.seatsAvailable.add(seatNumber);
-        } else {
-            throw new Exception("Cannot return unallocated seat!");
-        }
+    public void removeFromAllocatedSeats(int seatNumber){
+        this.allocatedSeats.remove(seatNumber);
     }
 
-    public ArrayList<Integer> seatsOnEmptyFlight(int totalCapacity){
-        ArrayList<Integer> allSeats = new ArrayList<>();
-        for (int i=0; i < totalCapacity-1; i++){
-            allSeats.add(i+1);
-        }
-        return allSeats;
+    public int getTotalSeatsOnFlight() {
+        return totalSeatsOnFlight;
     }
-
 }
