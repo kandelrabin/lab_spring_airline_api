@@ -53,5 +53,18 @@ public class FlightService {
         return flightRepository.countByDestination(destination);
     }
 
+    public int getCapacity(Long id){
+        Flight flight = getSingleFlight(id).get();
+        return flight.getCapacity();
+    }
+
+    public int allocateSeat(Long id){
+        Flight flight = getSingleFlight(id).get();
+        int seat = flight.allocateRandomSeat();
+        flightRepository.save(flight);
+        return seat;
+
+    }
+
 
 }

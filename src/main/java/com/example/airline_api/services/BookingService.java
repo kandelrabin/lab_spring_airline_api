@@ -2,11 +2,9 @@ package com.example.airline_api.services;
 
 import com.example.airline_api.models.*;
 import com.example.airline_api.repositories.BookingRepository;
-import com.example.airline_api.repositories.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +26,8 @@ public class BookingService {
         if (flight.getCapacity() > 0){
             Passenger passenger = passengerService.getSinglePassenger(bookingDTO.getPassengerId()).get();
             MealPreference mealPreference = MealPreference.valueOf(bookingDTO.getMealPreference());
-            Booking booking = new Booking(flight, passenger, bookingDTO.getSeatNumber(), mealPreference);
+            int seatNumber = flightService.allocateSeat(bookingDTO.getFlightId());
+            Booking booking = new Booking(flight, passenger,seatNumber,  mealPreference);
             flightService.reduceFlightCapacity(bookingDTO.getFlightId());
             bookingRepository.save(booking);
             return booking;
@@ -51,5 +50,6 @@ public class BookingService {
         bookingRepository.save(booking);
         return booking;
     }
+
 
 }

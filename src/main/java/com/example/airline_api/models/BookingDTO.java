@@ -5,13 +5,11 @@ public class BookingDTO {
 
     private Long flightId;
     private Long passengerId;
-    private int seatNumber;
     private String mealPreference;
 
-    public BookingDTO(Long flightId, Long passengerId, int seatNumber, String mealPreference) {
+    public BookingDTO(Long flightId, Long passengerId, String mealPreference) {
         this.flightId = flightId;
         this.passengerId = passengerId;
-        this.seatNumber = seatNumber;
         this.mealPreference = mealPreference;
     }
 
@@ -34,13 +32,6 @@ public class BookingDTO {
         this.passengerId = passengerId;
     }
 
-    public int getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(int seatNumber) {
-        this.seatNumber = seatNumber;
-    }
 
     public String getMealPreference() {
         return mealPreference;

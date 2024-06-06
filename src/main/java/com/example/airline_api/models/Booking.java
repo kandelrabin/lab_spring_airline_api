@@ -77,4 +77,5 @@ public class Booking {
     public void setMealPreference(MealPreference mealPreference) {
         this.mealPreference = mealPreference;
     }
+
 }
