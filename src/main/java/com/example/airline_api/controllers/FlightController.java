@@ -26,10 +26,12 @@ public class FlightController {
         List<Flight> flights;
         if (destination.isEmpty()){
             flights = flightService.getAllFlights();
-        } else {
+        } else if(flightService.checkDestinationIsPresent(destination.get())!=0){
             flights = flightService.filterFlightsByDestination(destination.get());
+        } else{
+            flights = null;
         }
-            return new ResponseEntity<>(flights, HttpStatus.OK);
+            return new ResponseEntity<>(flights, HttpStatus.BAD_REQUEST);
     }
 
     // SHOW

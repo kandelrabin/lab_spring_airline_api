@@ -49,5 +49,9 @@ public class FlightService {
         return flightRepository.findByDestinationEquals(destination);
     }
 
+    public Integer checkDestinationIsPresent(String destination){
+        return flightRepository.countByDestination(destination);
+    }
+
 
 }
